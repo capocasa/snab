@@ -1,0 +1,5 @@
+app/build
+app/.gradle
+app/.cxx
+app/src/main/cpp/glfm
+

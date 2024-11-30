@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 34
+    defaultConfig {
+        applicationId "org.example.glfman"
+        minSdkVersion 19
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+
+        // Add externalNativeBuild in defaultConfig (1/2)
+        externalNativeBuild {
+            cmake {
+                arguments "-DGLFM_BUILD_EXAMPLES=OFF"
+            }
+        }
+    }
+
+    // Add sourceSets.main and externalNativeBuild (2/2)
+    sourceSets.main {
+        assets.srcDirs = ["src/main/assets"]
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+    namespace 'org.example.glfme'
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
