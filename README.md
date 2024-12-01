@@ -10,11 +10,11 @@ Instructions
 
 ```sh
 # symlink glfm source
-cd glfman/app/src/main/cpp
+cd glfanim/app/src/main/cpp
 ln -s /path/to/glfm glfm
 
 # build
-cd glfman/app
+cd glfanim/app
 ./gradlew
 ```
 

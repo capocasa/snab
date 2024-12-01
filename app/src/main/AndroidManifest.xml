@@ -15,7 +15,7 @@
                   android:configChanges="orientation|screenLayout|screenSize|keyboardHidden|keyboard">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="glfman" />
+                android:value="glfanim" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
