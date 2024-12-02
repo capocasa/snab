@@ -23,10 +23,10 @@ android {
     }
     externalNativeBuild {
         cmake {
-            path "src/main/cpp/CMakeLists.txt"
+            path "CMakeLists.txt"
         }
     }
-    namespace 'org.example.glfme'
+    namespace 'org.example.glfanim'
 }
 
 buildscript {
