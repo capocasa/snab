@@ -65,7 +65,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${NIM_LIB_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}/nimcache
-  ${CMAKE_CURRENT_SOURCE_DIR}/glfm/include
+  ${GLFM_SOURCE_DIR}/include
 )
 # add android activity symbol
 # more info: https://github.com/android-ndk/ndk/issues/381
@@ -82,7 +82,7 @@ add_library(
   ${CMAKE_PROJECT_NAME}
   SHARED
   ${NIMCACHE_SOURCES}
-  ${CMAKE_CURRENT_SOURCE_DIR}/glfm/src/glfm_android.c
+  ${GLFM_SOURCE_DIR}/src/glfm_android.c
 )
 
 target_link_libraries(${CMAKE_PROJECT_NAME} android EGL GLESv2 log)
