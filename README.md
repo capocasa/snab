@@ -1,4 +1,4 @@
-Build Android-GLFM-Nim Applications
+Build Android-Nim-GLFM Applications
 ===
 
 This is a build setup to more or less easily build Nim applications that run on android and use OpenGL for the interface via the GLFM system- also known as the 'gaming stack'.
