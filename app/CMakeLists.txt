@@ -38,10 +38,16 @@ set(NIM_CPU_x86_64 amd64)
 
 set(NIM_CPU ${NIM_CPU_${ANDROID_ARCH_NAME}})
 
+set(NIM_RELEASE_FLAGS_Debug )
+set(NIM_RELEASE_FLAGS_RelWithDebInfo -d:danger --opt:speed)
+set(NIM_RELEASE_FLAGS_Release -d:danger --opt:speed) # not ordinarily needed
+
+set(NIM_RELEASE_FLAGS ${NIM_RELEASE_FLAGS_${CMAKE_BUILD_TYPE}})
+
 # compile C files into an ephemeral nimcache directory
 file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/nimcache/*)
 execute_process(
-  COMMAND ${NIM_CMD} c -c -f --cpu:${NIM_CPU} --os:android -d:androidNDK --noMain:on --app:lib --nimcache:${CMAKE_CURRENT_BINARY_DIR}/nimcache ${NIM_SOURCE_DIR}/${NIM_SOURCE_FILENAME}
+  COMMAND ${NIM_CMD} c -c -f --cpu:${NIM_CPU} --os:android -d:androidNDK --noMain:on --app:lib --nimcache:${CMAKE_CURRENT_BINARY_DIR}/nimcache ${NIM_RELEASE_FLAGS} ${NIM_SOURCE_DIR}/${NIM_SOURCE_FILENAME}
   COMMAND_ERROR_IS_FATAL ANY
   RESULT_VARIABLE NIM_RESULT
 )

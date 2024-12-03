@@ -65,7 +65,17 @@ To use this as your own app, do the following
 
 Sorry this is so all over the place. You could conceivably automate this but I think that would be too confusing and you have to do it once per app so it's okay. But do you think Google might have a bit of a complexity problem as an organization?
 
-If you do all this, you will have a neatly branded android app you can show off on your phone and put into free repositories like fdroid. You can also get it into the app store but that's out of scope for this.
+If you do all this, you will have a neatly branded android app.
+
+You can build a testing .apk to show off like so
+
+```sh
+app/gradlew -p app assemble
+```
+
+You can also [get it into the app store](https://developer.android.com/build/building-cmdline#bundle_build_gradle).
+
+There is a lot of nim configuration that needs to be done just right for android building, so the build script will steal control over the Nim command line from you and keep it all to itself. But you can still use `nim.cfg` or `foobar.nims` Nim configuration. If you really need to, you can find the line that says `${NIM_CMD} and carefully edit additional flags in before or after `${NIM_RELEASE_FLAGS}`.
 
 Structuring your project
 ---
