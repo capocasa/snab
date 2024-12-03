@@ -110,7 +110,7 @@ Ackknowledgements
 
 I would like to thank *yglukhov* for demonstrating this is possible and *treeform* and *GordonBGood* for their prior work in this area from whom I have liberally lifted bits and pieces.
 
-While we're add it, I'd also like to thank *Araq* for making Nim, *K&D* for C, *Wirth* for Pascal, and Alan Turing for the basics. ;)
+While we're add it, I'd also like to thank *Araq* for making Nim, *K&R* for C, *Wirth* for Pascal, and Alan Turing for the basics. ;)
 
 FAQ
 ---
