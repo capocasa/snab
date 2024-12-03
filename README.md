@@ -1,12 +1,16 @@
-Build Android GLFM Nim
+Build Android-GLFM-Nim Applications
 ===
 
-This is a GLFM Nim build setup to quickly get started building OpenGL Android apps with Nim. It uses the normal Android build tools and works from the command line.
+This is a build setup to more or less easily build Nim applications that run on android and use OpenGL for the interface via the GLFM system- also known as the 'gaming stack'.
+
+It uses the normal Android build tools and works from the command line, but you can also use Android Studio if you want to.
+
+Most little annoying things are automated away so it should be fairly straight forward to use.
 
 Quick Instructions
 ---
 
-Set up Nim and a C compiler.
+Set up Nim and a C compiler, as well as a Java Development Kit that isn't too new, I use 17.
 
 Connect an android device to your computer via USB and make sure you can reach it via adb (enable developer mode).
 
@@ -19,7 +23,7 @@ git clone https://github.com/brackeen/glfm.git
 
 # install nim dependencies
 nimble install opengl
-nimble install fglfm
+nimble install https://github.com/capocasa/fglfm
 
 # install android toolchain dependencies and build
 app/gradlew -p app installDebug

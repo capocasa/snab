@@ -25,7 +25,7 @@ endif()
 
 # get nim lib directory with nimbase.h
 execute_process(
-  COMMAND ${NIM_CMD} --hints:off --verbosity:0 e ${NIM_SOURCE_DIR}/version.nims
+  COMMAND ${NIM_CMD} --hints:off --verbosity:0 e ${CMAKE_CURRENT_SOURCE_DIR}/version.nims
   OUTPUT_VARIABLE NIM_LIB_DIR
   COMMAND_ERROR_IS_FATAL ANY
 )
