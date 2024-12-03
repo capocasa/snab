@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 34
     defaultConfig {
-        applicationId "org.example.glfanim"
+        applicationId "org.example.bang"
         minSdkVersion 19
         targetSdkVersion 34
         versionCode 1
@@ -11,9 +11,6 @@ android {
 
         // Add externalNativeBuild in defaultConfig (1/2)
         externalNativeBuild {
-            cmake {
-                arguments "-DGLFM_BUILD_EXAMPLES=OFF"
-            }
         }
     }
 
@@ -26,7 +23,7 @@ android {
             path "CMakeLists.txt"
         }
     }
-    namespace 'org.example.glfanim'
+    namespace 'org.example.bang'
 }
 
 buildscript {
