@@ -15,15 +15,22 @@ Set up Nim and a C compiler, as well as a Java Development Kit that isn't too ne
 Connect an android device to your computer via USB and make sure you can reach it via adb (enable developer mode).
 
 ```sh
-# prepare source
-git clone https://github.com/capocasa/bang.git
+# get starter project
+git clone https://github.com/capocasa/snab.git
 
-# add GLFM source in the same directory
-git clone https://github.com/brackeen/glfm.git
+# add SDL2 source in the same directory and symlink
+git clone -b SDL2 https://github.com/libsdl-org/SDL.git SDL2
+ln -s ../../SDL2 snab/app
+
+# add SDL_ttf module to display text for hello world
+git clone -b SDL2 https://github.com/libsdl-org/SDL_ttf.git SDL2_ttf
+ln -s ../../SDL2_ttf snab/app
 
 # install nim dependencies
 nimble install opengl
-nimble install https://github.com/capocasa/fglfm
+nimble install sdl2
+
+cd snab
 
 # install android toolchain dependencies and build
 app/gradlew -p app installDebug
@@ -67,8 +74,6 @@ To use this as your own app, do the following
 - Go into `app/src/main/res/values/strings.xml` and change the `app_name` value with our app name "Foo Bar". This is what users will see.
 - Go into `app/src/java` and change the org/example/snab directories to com/fuz. Rename Snab.java to `Foobar.java`. Replace org.example.snap with com.fuz and Snab with foobar in the java file. value with our app name "Foo Bar". This makes sure your technical app name is unique within the java code on the device and saves trouble.
 - Use some kind of android app icon generator, remove `app/src/main/res/midimap-*` directories and replace them with the output from the generator to have your own icon.
-
-Sorry this is so all over the place. You could conceivably automate this but I think that would be too confusing and you have to do it once per app so it's okay. But do you think Google might have a bit of a complexity problem as an organization?
 
 If you do all this, you will have a neatly branded android app.
 

@@ -58,9 +58,10 @@ set_property(
 
 ### Add SDL
 
-cmake_path(SET SDL2_DIR NORMALIZE "${CMAKE_CURRENT_SOURCE_DIR}/SDL2")
-add_subdirectory(${SDL2_DIR})
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/SDL2")
 find_library(SDL2 SDL2)
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/SDL2_ttf")
+find_library(SDL2_ttf SDL2_ttf)
 
 ### COMPILE C CODE
   
@@ -82,5 +83,5 @@ add_library(
   ${NIMCACHE_SOURCES}
 )
 
-target_link_libraries(${CMAKE_PROJECT_NAME} SDL2 log)
+target_link_libraries(${CMAKE_PROJECT_NAME} SDL2 SDL2_ttf log)
 
