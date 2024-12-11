@@ -4,16 +4,13 @@ cmake_minimum_required(VERSION 3.18.0)
 ## SETTINGS
 
 # project name
-project(bang)
+project(snab)
 
 # Nim source file (defaults to projectname.nim but change to anything you like)
 SET(NIM_SOURCE_FILENAME ${CMAKE_PROJECT_NAME}.nim)
 
 # Nim source directory defaults to repository root but change to anything you like
 cmake_path(SET NIM_SOURCE_DIR NORMALIZE "${CMAKE_CURRENT_SOURCE_DIR}/../")
-
-# GLFM source directory defaults to a glfm on the same leve as project root but change to anything you like
-cmake_path(SET GLFM_SOURCE_DIR NORMALIZE "${CMAKE_CURRENT_SOURCE_DIR}/../../glfm")
 
 ## SET UP NIM COMPILE
 
@@ -59,18 +56,19 @@ set_property(
   ${NIM_SOURCE_DIR}/${NIM_SOURCE_FILENAME}
 )
 
+### Add SDL
+
+cmake_path(SET SDL2_DIR NORMALIZE "${CMAKE_CURRENT_SOURCE_DIR}/SDL2")
+add_subdirectory(${SDL2_DIR})
+find_library(SDL2 SDL2)
+
 ### COMPILE C CODE
   
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${NIM_LIB_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}/nimcache
-  ${GLFM_SOURCE_DIR}/include
 )
-# add android activity symbol
-# more info: https://github.com/android-ndk/ndk/issues/381
-set(CMAKE_SHARED_LINKER_FLAGS
-    "${CMAKE_SHARED_LINKER_FLAGS} -v -u ANativeActivity_onCreate")
 
 # compile generated sources
 file(
@@ -82,8 +80,7 @@ add_library(
   ${CMAKE_PROJECT_NAME}
   SHARED
   ${NIMCACHE_SOURCES}
-  ${GLFM_SOURCE_DIR}/src/glfm_android.c
 )
 
-target_link_libraries(${CMAKE_PROJECT_NAME} android EGL GLESv2 log)
+target_link_libraries(${CMAKE_PROJECT_NAME} SDL2 log)
 
