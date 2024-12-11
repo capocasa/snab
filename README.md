@@ -1,7 +1,7 @@
-Build Android-Nim-GLFM Applications
+SDL2-Nim-Android Build
 ===
 
-This is a build setup to more or less easily build Nim applications that run on android and use OpenGL for the interface via the GLFM system- also known as the 'gaming stack'.
+This is a build setup to more or less easily build Nim applications that run on android and use the SDL2 framework.
 
 It uses the normal Android build tools and works from the command line, but you can also use Android Studio if you want to.
 
@@ -36,9 +36,9 @@ Quick Glossary
 
 gradle - the android build tool
 gradlew - the official gradle wrapper script that installs everything you need when you run it
-NativeActivity - a java class that comes with android to have a standard way to run compiled code in a shared library (`.so` `.dylib` or `.dll`)
+SDLActivity- a java class that comes with SDL for android to have a standard way to run compiled code in a shared library (`.so` `.dylib` or `.dll`)
 cmake - the preferred android build system for C code
-glfm - a quick way to set up OpenGL
+SDL2 - a framework to have keyboard, screen, mouse, touch and sound across phones and computers so you only have to write most of the code once
 Nim - one language to rule them all, used to generate the C code
 
 How It Works
@@ -47,13 +47,13 @@ How It Works
 When you run it, gradle:
 
 - installs all android dependencies it needs
-- Compiles the NativeActivity java class
+- Compiles the SDL java classes
 - Runs the included cmake build script once arm, arm64, i386 and amd64
   - Calls the nim compiler to generate the C code
   - Calls the C compiler like normal
 - installs the app on whatever device is connected via usb cable
 
-The main Nim file needs to contain some GLFM boilerplate code.
+The main Nim file needs to contain some SDL boilerplate code.
 
 Make it Yours
 -------------
@@ -65,6 +65,7 @@ To use this as your own app, do the following
 - Go into `app/CMakeLists.txt` and replace the project name `bang` with your technical app name `foobar`. You can change the nim source file name and nim source directory if you want to.
 - Go into `app/src/main/AndroidManifest.xml` and change the `lib_name` tag from `bang` to your technical project name `foobar`
 - Go into `app/src/main/res/values/strings.xml` and change the `app_name` value with our app name "Foo Bar". This is what users will see.
+- Go into `app/src/java` and change the org/example/snab directories to com/fuz. Rename Snab.java to `Foobar.java`. Replace org.example.snap with com.fuz and Snab with foobar in the java file. value with our app name "Foo Bar". This makes sure your technical app name is unique within the java code on the device and saves trouble.
 - Use some kind of android app icon generator, remove `app/src/main/res/midimap-*` directories and replace them with the output from the generator to have your own icon.
 
 Sorry this is so all over the place. You could conceivably automate this but I think that would be too confusing and you have to do it once per app so it's okay. But do you think Google might have a bit of a complexity problem as an organization?
@@ -81,42 +82,9 @@ You can also [get it into the app store](https://developer.android.com/build/bui
 
 There is a lot of nim configuration that needs to be done just right for android building, so the build script will steal control over the Nim command line from you and keep it all to itself. But you can still use `nim.cfg` or `foobar.nims` Nim configuration. If you really need to, you can find the line that says `${NIM_CMD} and carefully edit additional flags in before or after `${NIM_RELEASE_FLAGS}`.
 
-Structuring your project
+
+Acknowledgements
 ---
 
-There are two good ways of structuring your project that I can think of.
-
-The first is the one I use, have a nimble package with all of your main code that exports some startup and draw hooks. Then use this library to keep your android specific stuff out of the way and call into it.
-
-The other option is to put this code into a directory `build/android` in your project, and point the nim source file in `CMakeLists.txt` somewhere into your source tree. Do this if you prefer a monolithic repository that you can build your app for any platform from.
-
-Both approaches are fine. Personally I like keeping the build stuff out of my hair during app development effort but you will of course do whatever works for you.
-
-Rationale
----
-
-One reason a lot of us write web apps is because so many platforms have a browser you can write it once and have it work everywhere.
-
-While this isn't true for native programs, thanks to the game ecosystem you can write a program once. While it might not immediately run everywhere, you can at least expect it to *build* for every ecosystem.
-
-This isn't true at all for other ecosystems- operating system vendors like to make you do things their way. But they also can't afford to not have games. So if you accept to use game technology, you can control everything else. So game technology is the second most universal platform after browsers. Among gaming technology, if you don't need to push the limits, you can simply target OpenGL and you will have few issues. The idea here is to invest in a platform vendors can't afford to change.
-
-For your trouble, you get a lot of power. Code that runs at native speed and you don't have to run it on a server. Local video encode anyone? New cryptocurrency? Messenging app with 3D stickers? The sky's the limit.
-
-Interestingly, thanks to web apps, people tend not to expect an app to look and feel native anymore. So it's enough to design your UX to be more-or-less recognizable by mobile users. The unique feel can be part of your brand. And because you use gaming technology, people will just think you have yet another unique-looking app that's fast.
-
-Ackknowledgements
----
-
-I would like to thank *yglukhov* for demonstrating this is possible and *treeform* and *GordonBGood* for their prior work in this area from whom I have liberally lifted bits and pieces.
-
-While we're add it, I'd also like to thank *Araq* for making Nim, *K&R* for C, *Wirth* for Pascal, and Alan Turing for the basics. ;)
-
-FAQ
----
-
-Q: Did you actually call this thing bang?
-
-A: Yup. Couldn't resist :)
-
+Many thanks to *yglukhov*, *treeform* and *GordonBGood*. And myself, for the [GLFM version](https://github.com/capocasa/bang) version of this :)
 
